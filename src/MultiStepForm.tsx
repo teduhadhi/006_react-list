@@ -95,8 +95,7 @@ function MultiStepForm() {
   }
 
   return (
-    <div>
-      <h1></h1>
+    <div className="bg-white p-5 rounded-xl shadow-lg">
       {formStep()}
     </div>
   )

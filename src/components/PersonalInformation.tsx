@@ -18,7 +18,7 @@ function PersonalInformation ( { onSubmit, initialValues }: PersonalInformationP
 
   const PersonalInformationSchema = Yup.object().shape({
     fullName: Yup.string()
-      .min(3, 'Too Short!')
+      .min(2, 'Too Short!')
       .max(50, 'Too Long!')
       .required('Required'),
 
@@ -32,28 +32,28 @@ function PersonalInformation ( { onSubmit, initialValues }: PersonalInformationP
   });
 
   return (
-    <div>
-      <h1>Personal Information</h1>
+    <div className="flex flex-col justify-center items-center gap-5">
+      <h1 className="font-medium text-xl text-slate-700">Personal Information</h1>
       <Formik
         initialValues={initialValues}
         validationSchema={PersonalInformationSchema}
         onSubmit={onSubmit}
       >
         {() => (
-          <Form className="flex flex-col">
-            <label htmlFor="fullName">Full Name</label>
-            <Field name="fullName" id="fullName" />
+          <Form className="flex flex-col gap-1">
+            <label htmlFor="fullName" className="text-sm text-slate-500 font-medium">Full Name</label>
+            <Field name="fullName" id="fullName" className="shadow-md rounded-md p-2 mb-3" />
             <ErrorMessage name="fullName" component="div" className="text-red-500"/>
   
-            <label htmlFor="emailAddress">Email Address</label>
-            <Field name="emailAddress" type="emailAddress" />
+            <label htmlFor="emailAddress" className="text-sm text-slate-500 font-medium">Email Address</label>
+            <Field name="emailAddress" type="emailAddress" className="shadow-md rounded-md p-2 mb-3" />
             <ErrorMessage name="emailAddress" component="div" className="text-red-500"/>
 
-            <label htmlFor="dateOfBirth">Date of Birth</label>
-            <Field name="dateOfBirth" type="date" />
+            <label htmlFor="dateOfBirth" className="text-sm text-slate-500 font-medium">Date of Birth</label>
+            <Field name="dateOfBirth" type="date" className="shadow-md rounded-md p-2 mb-3" />
             <ErrorMessage name="dateOfBirth" component="div" className="text-red-500"/>
 
-            <button type="submit">Next</button>
+            <button className="font-medium bg-slate-400 text-white p-2 mt-2 rounded-md hover:bg-slate-200 hover:text-slate-400 transition shadow-md" type="submit">Next</button>
           </Form>
         )}
       </Formik>
