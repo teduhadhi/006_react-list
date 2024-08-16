@@ -24,8 +24,8 @@ function App() {
           Learn React
         </a>
       </header> */}
-      <ValidationSchemaExample/>
-      {/* <MultiStepForm/> */}
+      {/* <ValidationSchemaExample/> */}
+      <MultiStepForm/>
     </div>
   );
 }

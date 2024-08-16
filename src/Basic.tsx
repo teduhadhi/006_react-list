@@ -36,13 +36,11 @@ export const ValidationSchemaExample = () => (
           {/* {errors.firstName && touched.firstName ? (
             <div>{errors.firstName}</div>
           ) : null} */}
-          <ErrorMessage name="firstName" className='text-red-600'/>
+          <ErrorMessage name="firstName" component="div" className='text-red-600 bg-black'/>
 
           <label htmlFor="lastName">Last Name</label>
           <Field name="lastName" />
-          {errors.lastName && touched.lastName ? (
-            <div>{errors.lastName}</div>
-          ) : null}
+
 
           {/* <label htmlFor="firstName">First Name</label> */}
           <Field name="email" type="email" />
