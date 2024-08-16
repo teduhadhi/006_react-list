@@ -21,7 +21,7 @@ function MultiStepForm() {
       zipCode: "",
     },
     accountInformation: {
-      username: "",
+      userName: "",
       password: "",
     },
   });
@@ -52,6 +52,7 @@ function MultiStepForm() {
                 personalInformation: values,
               });
               handleNextFormStep();
+              // handleSubmit(values);
             }}
             initialValues = {formData.personalInformation}
           />
@@ -69,6 +70,7 @@ function MultiStepForm() {
                 addressInformation: values,
               });
               handleNextFormStep();
+              // handleSubmit(formData);
             }}
             initialValues = {formData.addressInformation}
             handlePreviousFormStep = {handlePreviousFormStep}
@@ -78,13 +80,15 @@ function MultiStepForm() {
         return (
           <AccountInformation
             onSubmit = {(values: { 
-              username: string; 
+              userName: string; 
               password: string }) => {
               setFormData({
                 ...formData,
                 accountInformation: values,
               });
-              handleSubmit(values);
+              
+              handleSubmit({...formData,
+                accountInformation: values});
             }}
             initialValues = {formData.accountInformation}
             handlePreviousFormStep = {handlePreviousFormStep}

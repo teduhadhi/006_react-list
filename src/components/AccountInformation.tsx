@@ -4,11 +4,11 @@ import * as Yup from 'yup';
 
 interface AccountInformationProps {
   onSubmit: (values: { 
-    username: string; 
+    userName: string; 
     password: string }) => void;
 
   initialValues: { 
-    username: string; 
+    userName: string; 
     password: string };
 
   handlePreviousFormStep: () => void;
