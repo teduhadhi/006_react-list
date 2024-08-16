@@ -68,7 +68,7 @@ function AddressInformation({onSubmit, initialValues, handlePreviousFormStep}: A
             <ErrorMessage name="zipCode" component="div" className="text-red-500"/>
 
             <button onClick={handlePreviousFormStep}>Back</button>
-            <button type="submit">Submit</button>
+            <button type="submit">Next</button>
           </Form>
         )}
       </Formik>
