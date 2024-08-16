@@ -36,7 +36,7 @@ function AddressInformation({onSubmit, initialValues, handlePreviousFormStep}: A
       .required('Required'),
 
     zipCode: Yup.string()
-      .length(6, 'Invalid zipcode')
+      .min(6, 'Invalid zipcode')
       .matches(/[0-9]/, 'Invalid zipcode')
       .required('Required'),
   });
@@ -49,7 +49,7 @@ function AddressInformation({onSubmit, initialValues, handlePreviousFormStep}: A
         validationSchema={AddressInformationSchema}
         onSubmit={onSubmit}
       >
-        {() => (
+        {({isSubmitting}) => (
           <Form className="flex flex-col gap-1">
             <label htmlFor="streetAddress" className="text-sm text-slate-500 font-medium">Street Address</label>
             <Field name="streetAddress" id="streetAddress" className="shadow-md rounded-md p-2 mb-3" />
@@ -68,7 +68,7 @@ function AddressInformation({onSubmit, initialValues, handlePreviousFormStep}: A
             <ErrorMessage name="zipCode" component="div" className="text-red-500 p-0 m-0"/>
 
             <button className="box-border font-medium bg-white text-slate-400 p-2 mt-2 rounded-md hover:bg-slate-200 hover:text-white hover:border-slate-200 border border-slate-400 transition hover:shadow-md" onClick={handlePreviousFormStep}>Back</button>
-            <button className="font-medium bg-slate-400 text-white p-2 mt-2 rounded-md hover:bg-slate-200 hover:text-slate-400 transition shadow-md"  type="submit">Next</button>
+            <button className="font-medium bg-slate-400 text-white p-2 mt-2 rounded-md hover:bg-slate-200 hover:text-slate-400 transition shadow-md" type="submit" disabled={isSubmitting}>Next</button>
           </Form>
         )}
       </Formik>

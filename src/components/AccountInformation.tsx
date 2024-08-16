@@ -40,7 +40,7 @@ function AccountInformation({onSubmit, initialValues, handlePreviousFormStep}: A
         validationSchema={AccountInformationSchema}
         onSubmit={onSubmit}
       >
-        {() => (
+        {({isSubmitting}) => (
           <Form className="flex flex-col gap-1">
             <label htmlFor="userName" className="text-sm text-slate-500 font-medium">Username</label>
             <Field name="userName" id="userName" className="shadow-md rounded-md p-2 mb-3" />
@@ -51,7 +51,7 @@ function AccountInformation({onSubmit, initialValues, handlePreviousFormStep}: A
             <ErrorMessage name="password" component="div" className="text-red-500"/>
 
             <button className="box-border font-medium bg-white text-slate-400 p-2 mt-2 rounded-md hover:bg-slate-200 hover:text-white hover:border-slate-200 border border-slate-400 transition hover:shadow-md" onClick={handlePreviousFormStep}>Back</button>
-            <button className="font-medium bg-slate-400 text-white p-2 mt-2 rounded-md hover:bg-slate-200 hover:text-slate-400 transition shadow-md"   type="submit">Submit</button>
+            <button className="font-medium bg-slate-400 text-white p-2 mt-2 rounded-md hover:bg-slate-200 hover:text-slate-400 transition shadow-md" type="submit" disabled={isSubmitting}>Submit</button>
           </Form>
         )}
       </Formik>

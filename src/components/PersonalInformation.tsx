@@ -39,7 +39,7 @@ function PersonalInformation ( { onSubmit, initialValues }: PersonalInformationP
         validationSchema={PersonalInformationSchema}
         onSubmit={onSubmit}
       >
-        {() => (
+        {({isSubmitting}) => (
           <Form className="flex flex-col gap-1">
             <label htmlFor="fullName" className="text-sm text-slate-500 font-medium">Full Name</label>
             <Field name="fullName" id="fullName" className="shadow-md rounded-md p-2 mb-3" />
@@ -53,7 +53,7 @@ function PersonalInformation ( { onSubmit, initialValues }: PersonalInformationP
             <Field name="dateOfBirth" type="date" className="shadow-md rounded-md p-2 mb-3" />
             <ErrorMessage name="dateOfBirth" component="div" className="text-red-500"/>
 
-            <button className="font-medium bg-slate-400 text-white p-2 mt-2 rounded-md hover:bg-slate-200 hover:text-slate-400 transition shadow-md" type="submit">Next</button>
+            <button className="font-medium bg-slate-400 text-white p-2 mt-2 rounded-md hover:bg-slate-200 hover:text-slate-400 transition shadow-md" type="submit" disabled={isSubmitting}>Next</button>
           </Form>
         )}
       </Formik>
