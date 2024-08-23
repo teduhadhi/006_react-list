@@ -3,7 +3,7 @@ import { Route, Routes, Link, BrowserRouter } from "react-router-dom";
 
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Test from "./components/Test";
+import List from "./components/List";
 import Authentication from "./components/Authentication";
 
 function App() {
@@ -13,9 +13,9 @@ function App() {
 				<Routes>
 					<Route path="/" element={<Login />} />
 					<Route path="/register" element={<Register />} />
-          <Route path="/test" element={
+          <Route path="/list" element={
             <Authentication>
-              <Test />
+              <List />
             </Authentication>
             } />
 				</Routes>
