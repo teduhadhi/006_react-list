@@ -9,7 +9,7 @@ import Authentication from "./components/Authentication";
 function App() {
 	return (
 		<BrowserRouter>
-			<div className="h-screen w-screen flex justify-center items-center bg-slate-200">
+			<div className="h-auto w-auto min-h-screen min-w-screen flex justify-center items-center bg-slate-200 py-14">
 				<Routes>
           <Route path="/" element={<Login />} />
 					<Route path="/login" element={<Login />} />

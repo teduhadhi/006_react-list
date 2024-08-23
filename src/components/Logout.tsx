@@ -6,6 +6,7 @@ function Logout() {
 
 	const handleLogout = () => {
 		sessionStorage.clear();
+    localStorage.clear();
     navigate("/login")
 	};
 

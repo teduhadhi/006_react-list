@@ -6,10 +6,10 @@ import * as Yup from "yup";
 import axios from "axios";
 import RedirectRegister from "./RedirectRegister";
 
-
 interface UserValues {
 	email: string;
 	password: string;
+	rememberMe: string;
 }
 
 const Login = () => {
@@ -17,13 +17,18 @@ const Login = () => {
 	const [errorMessage, setErrorMessage] = useState<string>();
 
 	useEffect(() => {
+		const localToken = localStorage.getItem("token");
+		if (localToken) {
+			sessionStorage.setItem("token", localToken);
+		}
 		const token = sessionStorage.getItem("token");
+
 		if (token) {
 			navigate("/list");
 		}
 	}, [navigate]);
 
-	const handlelogIn = async ({ email, password }: UserValues) => {
+	const handlelogIn = async ({ email, password, rememberMe }: UserValues) => {
 		await axios
 			.post(
 				"http://localhost:8080/login",
@@ -38,8 +43,10 @@ const Login = () => {
 				}
 			)
 			.then(function (response) {
-				console.log(response.data);
 				sessionStorage.setItem("token", response.data.accessToken);
+				if (rememberMe) {
+					localStorage.setItem("token", response.data.accessToken);
+				}
 				navigate("/list");
 			})
 			.catch(function (error) {
@@ -57,10 +64,8 @@ const Login = () => {
 	});
 	return (
 		<div>
-			
-
 			<Formik
-				initialValues={{ email: "", password: "" }}
+				initialValues={{ email: "", password: "", rememberMe: "" }}
 				validationSchema={loginSchema}
 				onSubmit={(values, { setSubmitting }) => {
 					setSubmitting(false);
@@ -68,13 +73,18 @@ const Login = () => {
 				}}
 			>
 				<Form className="flex flex-col gap-1 w-96 px-6 py-7 rounded-3xl bg-white shadow-lg">
-        {errorMessage !== null && <p className="text-red-500 flex justify-center mb-3">{errorMessage}</p>}
+					{errorMessage !== null && (
+						<p className="text-red-500 flex justify-center mb-3">
+							{errorMessage}
+						</p>
+					)}
 					<label className="text-m text-slate-500 font-medium" htmlFor="email">
 						Email
 					</label>
 					<Field
 						className="shadow-md rounded-md p-2 mb-3"
 						name="email"
+						id="email"
 						type="text"
 					/>
 					<ErrorMessage
@@ -92,6 +102,7 @@ const Login = () => {
 					<Field
 						className="shadow-md rounded-md p-2 mb-3"
 						name="password"
+						id="password"
 						type="password"
 					/>
 					<ErrorMessage
@@ -99,6 +110,13 @@ const Login = () => {
 						component="div"
 						name="password"
 					/>
+
+					<div className="flex gap-2">
+						<Field name="rememberMe" type="checkbox" />
+						<label className="text-m text-slate-700" htmlFor="rememberMe">
+							Remember me
+						</label>
+					</div>
 
 					<button
 						className="font-medium bg-slate-400 text-white p-2 mt-2 mb-3 rounded-md hover:bg-slate-200 hover:text-slate-400 transition shadow-md "

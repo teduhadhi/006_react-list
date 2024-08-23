@@ -5,6 +5,10 @@ function Authentication(props: any) {
 	const navigate = useNavigate();
 
 	useEffect(() => {
+    const localToken = localStorage.getItem("token")
+		if(localToken){
+			sessionStorage.setItem("token",localToken)
+		}
 		const token = sessionStorage.getItem("token");
 		if (!token) {
 			navigate("/login");
