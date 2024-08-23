@@ -1,33 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-// import './App.css';
-import MultiStepForm from './MultiStepForm';
-import {ValidationSchemaExample} from './Basic';
+import React from "react";
+import { Route, Routes, Link, BrowserRouter } from "react-router-dom";
+
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Test from "./components/Test";
+import Authentication from "./components/Authentication";
 
 function App() {
-  return (
-    <div className="h-screen w-screen flex justify-center items-center bg-slate-200">
-      {/* <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1> */}
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-      {/* <ValidationSchemaExample/> */}
-      <MultiStepForm/>
-    </div>
-  );
+	return (
+		<BrowserRouter>
+			<div className="h-screen w-screen flex justify-center items-center bg-slate-200">
+				<Routes>
+					<Route path="/" element={<Login />} />
+					<Route path="/register" element={<Register />} />
+          <Route path="/test" element={
+            <Authentication>
+              <Test />
+            </Authentication>
+            } />
+				</Routes>
+			</div>
+		</BrowserRouter>
+	);
 }
 
 export default App;

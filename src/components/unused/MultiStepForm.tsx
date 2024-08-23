@@ -1,8 +1,8 @@
 import { Formik } from 'formik'
 import React, {useState} from 'react'
-import PersonalInformation from './components/PersonalInformation';
-import AccountInformation from './components/AccountInformation';
-import AddressInformation from './components/AddressInformation';
+import PersonalInformation from './PersonalInformation';
+import AccountInformation from './AccountInformation';
+import AddressInformation from './AddressInformation';
 
 
 
