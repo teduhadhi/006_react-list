@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import RedirectLogin from "./RedirectLogin";
+
 
 interface UserValues {
 	email: string;
@@ -31,7 +33,7 @@ const Register = () => {
 			})
 			.catch(function (error) {
 				console.log(error);
-				setErrorMessage("User already exist");
+				setErrorMessage("User already exists");
 			});
 	};
 
@@ -61,7 +63,7 @@ const Register = () => {
 			}}
 		>
 			<Form className="flex flex-col gap-1 w-96 px-6 py-7 rounded-3xl bg-white shadow-lg">
-				{errorMessage !== null && <p>{errorMessage}</p>}
+				{errorMessage !== null && <p className="text-red-500 flex justify-center mb-3">{errorMessage}</p>}
 
 				<label className="text-m text-slate-500 font-medium" htmlFor="email">
 					Email
@@ -101,11 +103,12 @@ const Register = () => {
 				<ErrorMessage name="passwordConfirmation" />
 
 				<button
-					className="font-medium bg-slate-400 text-white p-2 mt-2 rounded-md hover:bg-slate-200 hover:text-slate-400 transition shadow-md"
+					className="font-medium bg-slate-400 text-white p-2 mt-2 mb-3 rounded-md hover:bg-slate-200 hover:text-slate-400 transition shadow-md"
 					type="submit"
 				>
 					Submit
 				</button>
+        <RedirectLogin/>
 			</Form>
 		</Formik>
 	);

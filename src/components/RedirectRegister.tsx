@@ -7,9 +7,9 @@ function RedirectRegister() {
 	};
 
 	return (
-		<p>
-			Don't have an account?{" "}
-			<span className="cursor-pointer text-slate-500 font-medium hover:text-slate-400 transition" onClick={handleRedirectRegister}>
+		<p className="flex justify-center text-sm gap-1">
+			Don't have an account?
+			<span className=" cursor-pointer text-slate-500 font-medium hover:text-slate-400 transition" onClick={handleRedirectRegister}>
 				Register here
 			</span>
 		</p>

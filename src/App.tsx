@@ -11,7 +11,8 @@ function App() {
 		<BrowserRouter>
 			<div className="h-screen w-screen flex justify-center items-center bg-slate-200">
 				<Routes>
-					<Route path="/" element={<Login />} />
+          <Route path="/" element={<Login />} />
+					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
           <Route path="/list" element={
             <Authentication>

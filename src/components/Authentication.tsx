@@ -7,7 +7,7 @@ function Authentication(props: any) {
 	useEffect(() => {
 		const token = sessionStorage.getItem("token");
 		if (!token) {
-			navigate("/");
+			navigate("/login");
 		}
 	}, [navigate]);
 	return props.children;

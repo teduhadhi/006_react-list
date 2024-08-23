@@ -6,12 +6,12 @@ function Logout() {
 
 	const handleLogout = () => {
 		sessionStorage.clear();
-    navigate("/")
+    navigate("/login")
 	};
 
 	return (
 		<p
-			className="cursor-pointer text-slate-500 font-medium hover:text-slate-400 transition"
+			className="cursor-pointer text-slate-500 font-medium hover:text-slate-400 transition px-1"
 			onClick={handleLogout}
 		>
 			Logout

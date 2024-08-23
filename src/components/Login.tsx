@@ -19,7 +19,7 @@ const Login = () => {
 	useEffect(() => {
 		const token = sessionStorage.getItem("token");
 		if (token) {
-			navigate("/List");
+			navigate("/list");
 		}
 	}, [navigate]);
 
@@ -57,7 +57,7 @@ const Login = () => {
 	});
 	return (
 		<div>
-			{errorMessage !== null && <p>{errorMessage}</p>}
+			
 
 			<Formik
 				initialValues={{ email: "", password: "" }}
@@ -68,6 +68,7 @@ const Login = () => {
 				}}
 			>
 				<Form className="flex flex-col gap-1 w-96 px-6 py-7 rounded-3xl bg-white shadow-lg">
+        {errorMessage !== null && <p className="text-red-500 flex justify-center mb-3">{errorMessage}</p>}
 					<label className="text-m text-slate-500 font-medium" htmlFor="email">
 						Email
 					</label>

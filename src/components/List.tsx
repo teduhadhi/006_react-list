@@ -14,14 +14,14 @@ function List() {
 		id: "",
 	});
 	const [isUpdating, setIsUpdating] = useState<any>(false);
-	const [isInputing, setIsInputing] = useState<any>(false)
+	const [isInputing, setIsInputing] = useState<any>(false);
 
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		const token = sessionStorage.getItem("token");
 		if (!token) {
-			navigate("/");
+			navigate("/login");
 		} else {
 			handleCattegory();
 		}
@@ -78,6 +78,10 @@ function List() {
 		handleCattegory();
 	};
 
+	const handleInput = () => {
+		setIsInputing(true);
+	};
+
 	const handleDeleteCattegory = async (id: number) => {
 		await axios.delete(`http://localhost:8080/categories/${id}`, {
 			headers: {
@@ -89,6 +93,7 @@ function List() {
 	};
 
 	const handleUpdateCattegory = async (item: any) => {
+		setIsInputing(true);
 		setIsUpdating(true);
 		setInitialValues({
 			name: item.name,
@@ -97,70 +102,87 @@ function List() {
 		});
 	};
 
-	const loginSchema = Yup.object().shape({
+	const listSchema = Yup.object().shape({
 		name: Yup.string().required("Required"),
 		description: Yup.string().required("Required"),
 	});
 
 	return (
 		<div className="flex gap-10 px-6 py-7 rounded-3xl bg-white shadow-lg">
-			<Formik
-				initialValues={initialValues}
-				enableReinitialize={true}
-				validationSchema={loginSchema}
-				onSubmit={(values, { setSubmitting }) => {
-					setSubmitting(false);
-					handleNewCattegory(values);
-				}}
-			>
-				<Form className="flex flex-col gap-1 rounded-3xl w-60 ">
-					<Logout />
+			<div className="flex flex-col gap-1 rounded-3xl w-60 ">
+				
+				{isInputing ? (
+					<Formik
+						initialValues={initialValues}
+						enableReinitialize={true}
+						validationSchema={listSchema}
+						onSubmit={(values, { setSubmitting }) => {
+							setSubmitting(false);
+							handleNewCattegory(values);
+						}}
+					>
+						<Form className="flex flex-col gap-1 w-full ">
+							<label
+								className="text-m text-slate-500 font-medium flex justify-between"
+								htmlFor="name"
+							>
+								<p>Name</p>
+								{isUpdating && <p>Id : {initialValues.id}</p>}
+							</label>
+							<Field
+								className="shadow-md rounded-md p-2 mb-3"
+								name="name"
+								id="name"
+								type="text"
+							/>
+							<ErrorMessage
+								className="text-red-500"
+								component="div"
+								name="name"
+							/>
+
+							<label
+								className="text-m text-slate-500 font-medium"
+								htmlFor="description"
+							>
+								Description
+							</label>
+							<Field
+								className="shadow-md rounded-md p-2 mb-3"
+								name="description"
+								id="description"
+								type="text"
+							/>
+							<ErrorMessage
+								className="text-red-500"
+								component="div"
+								name="description"
+							/>
+
+							<button
+								className="font-medium bg-slate-400 text-white p-2 mt-2 mb-3 rounded-md hover:bg-slate-200 hover:text-slate-400 transition shadow-md "
+								type="submit"
+							>
+								{!isUpdating ? "Submit" : "Update"}
+							</button>
+						</Form>
+					</Formik>
+				) : (
 					<button
 						className="font-medium bg-slate-400 text-white p-2 mt-2 mb-3 rounded-md hover:bg-slate-200 hover:text-slate-400 transition shadow-md "
-						type="submit"
+						onClick={handleInput}
 					>
-						{isInputing ? "Submit" : "Update"}
+						Input Data
 					</button>
-					<label className="text-m text-slate-500 font-medium flex justify-between" htmlFor="name">
-						<p>Name</p>
-						{isUpdating && <p>Id : {initialValues.id}</p>}
-					</label>
-					<Field
-						className="shadow-md rounded-md p-2 mb-3"
-						name="name"
-						id="name"
-						type="text"
-					/>
-					<ErrorMessage className="text-red-500" component="div" name="name" />
+				)}
+			</div>
 
-					<label
-						className="text-m text-slate-500 font-medium"
-						htmlFor="description"
-					>
-						Description
-					</label>
-					<Field
-						className="shadow-md rounded-md p-2 mb-3"
-						name="description"
-						id="description"
-						type="text"
-					/>
-					<ErrorMessage
-						className="text-red-500"
-						component="div"
-						name="description"
-					/>
-
-					<button
-						className="font-medium bg-slate-400 text-white p-2 mt-2 mb-3 rounded-md hover:bg-slate-200 hover:text-slate-400 transition shadow-md "
-						type="submit"
-					>
-						{!isUpdating ? "Submit" : "Update"}
-					</button>
-				</Form>
-			</Formik>
 			<ol className="flex flex-col gap-3 w-96 ">
+				<div className="flex justify-between">
 				<h1 className="font-medium text-xl text-slate-500">List</h1>
+				<Logout />
+				</div>
+				
 				{cattegoryList &&
 					cattegoryList.map((item: any, index: any) => (
 						<li
@@ -176,22 +198,23 @@ function List() {
 							</div>
 
 							<div className="flex flex-col justify-around">
-								<p className="flex justify-end text-sm text-slate-400">Id : {index+1}</p>
+								<p className="flex justify-end text-sm text-slate-400">
+									Id : {index + 1}
+								</p>
 								<div className="flex flex-col justify-around gap-1">
-								<button
-									className="cursor-pointer text-slate-500 font-medium hover:text-slate-400 transition text-sm"
-									onClick={() => handleUpdateCattegory(item)}
-								>
-									UPDATE
-								</button>
-								<button
-									className="cursor-pointer text-red-700 font-medium hover:text-red-500 transition text-sm"
-									onClick={() => handleDeleteCattegory(item.id)}
-								>
-									DELETE
-								</button>
+									<button
+										className="cursor-pointer text-slate-500 font-medium hover:text-slate-400 transition text-sm"
+										onClick={() => handleUpdateCattegory(item)}
+									>
+										UPDATE
+									</button>
+									<button
+										className="cursor-pointer text-red-700 font-medium hover:text-red-500 transition text-sm"
+										onClick={() => handleDeleteCattegory(item.id)}
+									>
+										DELETE
+									</button>
 								</div>
-								
 							</div>
 						</li>
 					))}
