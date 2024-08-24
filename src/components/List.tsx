@@ -266,7 +266,7 @@ const List: React.FC = () => {
 											</button>
 										</div>
 									</div>
-									<div className="flex h-screen w-screen fixed bg-black opacity-25 "></div>
+									<div className="flex h-screen w-screen fixed bg-black opacity-5 "></div>
 								</div>
 							)}
 							<div>
