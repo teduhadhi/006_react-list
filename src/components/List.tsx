@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import Logout from "./Logout";
 
-function List() {
-	const [cattegoryList, setCattegoryList] = useState<any>();
-	const [initialValues, setInitialValues] = useState<any>({
+interface ItemProps {
+	name: string;
+	description: string;
+	id: string;
+}
+
+const List: React.FC = () => {
+	const [cattegoryList, setCattegoryList] = useState<[]>();
+	const [initialValues, setInitialValues] = useState<ItemProps>({
 		name: "",
 		description: "",
 		id: "",
@@ -17,15 +23,15 @@ function List() {
 	const [isInputing, setIsInputing] = useState<boolean>(false);
 	const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
-	const navigate = useNavigate();
+	const navigate: NavigateFunction = useNavigate();
 
-	useEffect(() => {
-		const localToken = localStorage.getItem("token");
+	useEffect((): void => {
+		const localToken: string | null = localStorage.getItem("token");
 		if (localToken) {
 			sessionStorage.setItem("token", localToken);
 		}
 
-		const token = sessionStorage.getItem("token");
+		const token: string | null = sessionStorage.getItem("token");
 		if (!token) {
 			navigate("/login");
 		} else {
@@ -33,7 +39,7 @@ function List() {
 		}
 	}, [navigate]);
 
-	const handleCattegory = async () => {
+	const handleCattegory = async (): Promise<void> => {
 		await axios
 			.get("http://localhost:8080/categories")
 			.then(function (response) {
@@ -41,6 +47,7 @@ function List() {
 				setInitialValues({
 					name: "",
 					description: "",
+					id: "",
 				});
 			})
 			.catch(function (error) {
@@ -48,7 +55,7 @@ function List() {
 			});
 	};
 
-	const handleNewCattegory = async (values: any) => {
+	const handleNewCattegory = async (values: ItemProps): Promise<void> => {
 		if (!isUpdating) {
 			await axios.post(
 				"http://localhost:8080/categories/",
@@ -84,11 +91,11 @@ function List() {
 		handleCattegory();
 	};
 
-	const handleInput = () => {
+	const handleInput = (): void => {
 		setIsInputing(true);
 	};
 
-	const handleDeleteCattegory = async (id: number) => {
+	const handleDeleteCattegory = async (id: string): Promise<void> => {
 		await axios.delete(`http://localhost:8080/categories/${id}`, {
 			headers: {
 				"Content-Type": "application/x-www-form-urlencoded",
@@ -99,11 +106,16 @@ function List() {
 		handleCattegory();
 	};
 
-	const handleDeleteConfirmation = () => {
+	const handleDeleteConfirmation = (): void => {
 		setIsDeleting(true);
 	};
 
-	const handleUpdateCattegory = async (item: any) => {
+	const handleUpdateCattegory = async (item: ItemProps): Promise<void> => {
+		window.scrollTo({
+			top: 0,
+			left: 0,
+			behavior: "smooth"
+		});
 		setIsInputing(true);
 		setIsUpdating(true);
 		setInitialValues({
@@ -113,12 +125,13 @@ function List() {
 		});
 	};
 
-	const handleCancelInput = () => {
+	const handleCancelInput = (): void => {
 		setIsInputing(false);
 		setIsUpdating(false);
 		setInitialValues({
 			name: "",
 			description: "",
+			id: "",
 		});
 	};
 
@@ -215,7 +228,7 @@ function List() {
 				</div>
 
 				{cattegoryList &&
-					cattegoryList.map((item: any, index: any) => (
+					cattegoryList.map((item: ItemProps, index: number) => (
 						<li
 							className="flex justify-between gap-4 border-t-2 border-solid border-slate-200"
 							key={index}
@@ -223,9 +236,14 @@ function List() {
 							{isDeleting && (
 								<div className="flex h-screen w-screen fixed justify-center items-center top-0 left-0">
 									<div className="flex flex-col gap-10 px-20 py-7 rounded-xl bg-white shadow-lg z-10 relative ">
-										<div className="absolute right-5 top-4 cursor-pointer" onClick={() => (setIsDeleting(false))}>&#9932;</div>
+										<div
+											className="absolute right-5 top-4 cursor-pointer"
+											onClick={() => setIsDeleting(false)}
+										>
+											&#9932;
+										</div>
 										<div className="flex flex-col gap-4 items-center">
-											<span className="text-7xl mb-3" >&#9888;</span>
+											<span className="text-7xl mb-3">&#9888;</span>
 											<h2 className="font-medium text-2xl text-slate-600">
 												Delete the item?
 											</h2>
@@ -234,7 +252,10 @@ function List() {
 											</p>
 										</div>
 										<div className="flex gap-10 justify-between">
-											<button className="w-28 box-border font-medium bg-white text-slate-400 p-2 mt-2 rounded-md hover:bg-slate-200 hover:text-white hover:border-slate-200 border border-slate-400 transition hover:shadow-md" onClick={() => (setIsDeleting(false))}>
+											<button
+												className="w-28 box-border font-medium bg-white text-slate-400 p-2 mt-2 rounded-md hover:bg-slate-200 hover:text-white hover:border-slate-200 border border-slate-400 transition hover:shadow-md"
+												onClick={() => setIsDeleting(false)}
+											>
 												Cancel
 											</button>
 											<button
@@ -262,10 +283,10 @@ function List() {
 								</p>
 								<div className="flex flex-col justify-around gap-1">
 									<button
-										className="cursor-pointer text-slate-500 font-medium hover:text-slate-400 transition text-sm"
+										className="cursor-pointer text-slate-500 font-medium hover:text-slate-400 transition pl-4 text-sm"
 										onClick={() => handleUpdateCattegory(item)}
 									>
-										UPDATE
+										EDIT
 									</button>
 									<button
 										className="cursor-pointer text-red-700 font-medium hover:text-red-500 transition text-sm"
@@ -280,6 +301,6 @@ function List() {
 			</ol>
 		</div>
 	);
-}
+};
 
 export default List;

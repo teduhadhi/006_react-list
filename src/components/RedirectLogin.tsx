@@ -1,9 +1,8 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
-function RedirectLogin() {
-	const navigate = useNavigate();
-	const handleRedirectLogin = () => {
+const RedirectLogin: React.FC = () => {
+	const navigate: NavigateFunction = useNavigate();
+	const handleRedirectLogin = (): void => {
 		navigate("/login");
 	};
 

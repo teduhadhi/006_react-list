@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -12,16 +12,16 @@ interface UserValues {
 	rememberMe: string;
 }
 
-const Login = () => {
-	const navigate = useNavigate();
+const Login: React.FC = () => {
+	const navigate: NavigateFunction = useNavigate();
 	const [errorMessage, setErrorMessage] = useState<string>();
 
-	useEffect(() => {
-		const localToken = localStorage.getItem("token");
+	useEffect((): void => {
+		const localToken: string | null = localStorage.getItem("token");
 		if (localToken) {
 			sessionStorage.setItem("token", localToken);
 		}
-		const token = sessionStorage.getItem("token");
+		const token: string | null = sessionStorage.getItem("token");
 
 		if (token) {
 			navigate("/list");
@@ -67,7 +67,7 @@ const Login = () => {
 			<Formik
 				initialValues={{ email: "", password: "", rememberMe: "" }}
 				validationSchema={loginSchema}
-				onSubmit={(values, { setSubmitting }) => {
+				onSubmit={(values: UserValues, { setSubmitting }) => {
 					setSubmitting(false);
 					handlelogIn(values);
 				}}

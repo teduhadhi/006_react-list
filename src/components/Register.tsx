@@ -5,13 +5,12 @@ import * as Yup from "yup";
 import axios from "axios";
 import RedirectLogin from "./RedirectLogin";
 
-
 interface UserValues {
 	email: string;
 	password: string;
 }
 
-const Register = () => {
+const Register: React.FC = () => {
 	const [errorMessage, setErrorMessage] = useState<string>();
 
 	const handleRegister = async ({ email, password }: UserValues) => {

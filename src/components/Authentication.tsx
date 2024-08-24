@@ -1,20 +1,20 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
-function Authentication(props: any) {
-	const navigate = useNavigate();
+const Authentication: React.FC<any> = ({ children }) => {
+	const navigate: NavigateFunction = useNavigate();
 
 	useEffect(() => {
-    const localToken = localStorage.getItem("token")
-		if(localToken){
-			sessionStorage.setItem("token",localToken)
+		const localToken: string | null = localStorage.getItem("token");
+		if (localToken) {
+			sessionStorage.setItem("token", localToken);
 		}
-		const token = sessionStorage.getItem("token");
+		const token: string | null = sessionStorage.getItem("token");
 		if (!token) {
 			navigate("/login");
 		}
 	}, [navigate]);
-	return props.children;
-}
+	return children;
+};
 
 export default Authentication;

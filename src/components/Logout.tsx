@@ -1,10 +1,9 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
-function Logout() {
-	const navigate = useNavigate()
+const Logout: React.FC = () => {
+	const navigate:NavigateFunction = useNavigate()
 
-	const handleLogout = () => {
+	const handleLogout = (): void => {
 		sessionStorage.clear();
     localStorage.clear();
     navigate("/login")
