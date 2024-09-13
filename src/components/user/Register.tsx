@@ -3,15 +3,17 @@ import { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import RedirectLogin from "./RedirectLogin";
+import RedirectLogin from "../navigate/RedirectLogin";
 
 interface UserValues {
 	email: string;
 	password: string;
 }
 
-const Register: React.FC = () => {
+const Register: React.FC = ({testt}:any) => {
 	const [errorMessage, setErrorMessage] = useState<string>();
+
+	console.log(testt)
 
 	const handleRegister = async ({ email, password }: UserValues) => {
 		await axios

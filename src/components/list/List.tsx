@@ -4,7 +4,7 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import Logout from "./Logout";
+import Logout from "../user/Logout";
 
 interface ItemProps {
 	name: string;
@@ -30,7 +30,6 @@ const List: React.FC = () => {
 		if (localToken) {
 			sessionStorage.setItem("token", localToken);
 		}
-
 		const token: string | null = sessionStorage.getItem("token");
 		if (!token) {
 			navigate("/login");
@@ -84,10 +83,8 @@ const List: React.FC = () => {
 					},
 				}
 			);
-
 			setIsUpdating(false);
 		}
-
 		handleCattegory();
 	};
 
@@ -114,7 +111,7 @@ const List: React.FC = () => {
 		window.scrollTo({
 			top: 0,
 			left: 0,
-			behavior: "smooth"
+			behavior: "smooth",
 		});
 		setIsInputing(true);
 		setIsUpdating(true);
@@ -221,12 +218,11 @@ const List: React.FC = () => {
 				)}
 			</div>
 
+			<div className="flex justify-between">
+				<h1 className="font-medium text-xl text-slate-500">List</h1>
+				<Logout />
+			</div>
 			<ol className="flex flex-col gap-3 w-96 ">
-				<div className="flex justify-between">
-					<h1 className="font-medium text-xl text-slate-500">List</h1>
-					<Logout />
-				</div>
-
 				{cattegoryList &&
 					cattegoryList.map((item: ItemProps, index: number) => (
 						<li
