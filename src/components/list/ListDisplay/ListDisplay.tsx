@@ -38,6 +38,7 @@ const ListDisplay = ({
 			{categoryList &&
 				categoryList.map((item: ItemProps, index: number) => (
 					<li
+						data-testid="list-item"
 						className="flex justify-between gap-4 border-t-2 border-solid border-slate-200"
 						key={index}
 					>
@@ -63,12 +64,14 @@ const ListDisplay = ({
 							</p>
 							<div className="flex flex-col justify-around gap-1">
 								<button
+									data-testid="button-edit-item"
 									className="cursor-pointer text-slate-500 font-medium hover:text-slate-400 transition pl-4 text-sm"
 									onClick={() => handleUpdateCategory(item)}
 								>
 									EDIT
 								</button>
 								<button
+									data-testid="button-delete-item"
 									className="cursor-pointer text-red-700 font-medium hover:text-red-500 transition text-sm"
 									onClick={() => {
 										handleDeleteConfirmation(item.id);

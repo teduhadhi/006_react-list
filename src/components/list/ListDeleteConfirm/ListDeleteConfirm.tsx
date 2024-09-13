@@ -7,7 +7,7 @@ interface ListDeleteConfirm {
 
 const ListDeleteConfirm = ({ handleDeleteItem, deleteState}: ListDeleteConfirm) => {
 	return (
-		<div className="flex h-screen w-screen fixed justify-center items-center top-0 left-0">
+		<div data-testid="modal-delete-confirm" className="flex h-screen w-screen fixed justify-center items-center top-0 left-0">
 			<div className="flex flex-col gap-10 px-20 py-7 rounded-xl bg-white shadow-lg z-10 relative ">
 				<div
 					className="absolute right-5 top-4 cursor-pointer"
@@ -32,6 +32,7 @@ const ListDeleteConfirm = ({ handleDeleteItem, deleteState}: ListDeleteConfirm) 
 						Cancel
 					</button>
 					<button
+						data-testid="button-delete-item-confirmed"
 						className=" w-28 font-medium bg-slate-400 text-white p-2 mt-2 rounded-md hover:bg-slate-200 hover:text-slate-400 transition shadow-md"
 						onClick={() => handleDeleteItem()}
 					>

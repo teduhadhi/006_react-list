@@ -8,6 +8,7 @@ describe("List Input Component", () => {
 	const handleInput = jest.fn();
 	const handleCancelInput = jest.fn();
 	const handleNewCategory = jest.fn();
+
 	test("Submit New Category", async () => {
 		const initialValues = { name: "", description: "", id: "" };
 
@@ -21,6 +22,7 @@ describe("List Input Component", () => {
 				handleNewCategory={handleNewCategory}
 			/>
 		);
+
 		const nameInput = screen.getByTestId("input-name");
 		const descriptionInput = screen.getByTestId("input-description");
 		const submitButton = screen.getByTestId("button-submit-update");
@@ -36,7 +38,7 @@ describe("List Input Component", () => {
 		});
 	});
 
-	test("Update Existing Category by Adding '(updated)' text to each of the existing name and description", async () => {
+	test("Update Existing Category by adding '(updated)' text to each of the existing name and description", async () => {
 		const initialValues = {
 			name: "test update name",
 			description: "test update description",
