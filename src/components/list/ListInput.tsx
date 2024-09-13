@@ -2,7 +2,13 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 
-const ListInput = () => {
+const ListInput = ({isInputing, isUpdating, initialValues, handleInput, handleCancelInput, handleNewCategory}:any) => {
+
+  const listSchema = Yup.object().shape({
+		name: Yup.string().required("Required"),
+		description: Yup.string().required("Required"),
+	});
+
   return (
     <div className="flex flex-col gap-1 rounded-3xl w-60 ">
 				{isInputing ? (
@@ -12,7 +18,7 @@ const ListInput = () => {
 						validationSchema={listSchema}
 						onSubmit={(values, { setSubmitting }) => {
 							setSubmitting(false);
-							handleNewCattegory(values);
+							handleNewCategory(values);
 						}}
 					>
 						<Form className="flex flex-col gap-1 w-full ">
