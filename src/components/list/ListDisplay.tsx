@@ -4,16 +4,21 @@ import axios from "axios";
 import { ItemProps } from "../interfaces/list.interface";
 
 interface ListDisplay {
-  categoryList: [] | undefined,
-  handleCategory: Function,
-  handleUpdateCategory:Function,
+	categoryList: [] | undefined;
+	handleCategory: Function;
+	handleUpdateCategory: Function;
 }
 
-const ListDisplay = ({handleCategory, categoryList, handleUpdateCategory }:ListDisplay) => {
+const ListDisplay = ({
+	handleCategory,
+	categoryList,
+	handleUpdateCategory,
+}: ListDisplay) => {
 	const [isDeleting, setIsDeleting] = useState<boolean>(false);
+	const [deleteId, setDeleteId] = useState<string>();
 
-	const handleDeleteCategory = async (id: string): Promise<void> => {
-		await axios.delete(`http://localhost:8080/categories/${id}`, {
+	const handleDeleteCategory = async (): Promise<void> => {
+		await axios.delete(`http://localhost:8080/categories/${deleteId}`, {
 			headers: {
 				"Content-Type": "application/x-www-form-urlencoded",
 				Authorization: `Bearer ${sessionStorage.getItem("token")}`,
@@ -23,7 +28,8 @@ const ListDisplay = ({handleCategory, categoryList, handleUpdateCategory }:ListD
 		handleCategory();
 	};
 
-	const handleDeleteConfirmation = (): void => {
+	const handleDeleteConfirmation = (id: string): void => {
+		setDeleteId(id);
 		setIsDeleting(true);
 	};
 
@@ -35,7 +41,14 @@ const ListDisplay = ({handleCategory, categoryList, handleUpdateCategory }:ListD
 						className="flex justify-between gap-4 border-t-2 border-solid border-slate-200"
 						key={index}
 					>
-						{isDeleting && <ListDeleteConfirm handleDeleteItem={() => {handleDeleteCategory(item.id)}} deleteState={(value:boolean) => {setIsDeleting(value)}}/>}
+						{isDeleting && (
+							<ListDeleteConfirm
+								handleDeleteItem={handleDeleteCategory}
+								deleteState={(value: boolean) => {
+									setIsDeleting(value);
+								}}
+							/>
+						)}
 						<div>
 							<p className="mt-1 text-sm text-slate-400 ">Name</p>
 							<p className="mb-2">{item.name}</p>
@@ -57,7 +70,9 @@ const ListDisplay = ({handleCategory, categoryList, handleUpdateCategory }:ListD
 								</button>
 								<button
 									className="cursor-pointer text-red-700 font-medium hover:text-red-500 transition text-sm"
-									onClick={handleDeleteConfirmation}
+									onClick={() => {
+										handleDeleteConfirmation(item.id);
+									}}
 								>
 									DELETE
 								</button>
