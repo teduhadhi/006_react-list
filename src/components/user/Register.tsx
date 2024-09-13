@@ -4,6 +4,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import RedirectLogin from "../navigate/RedirectLogin";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 interface UserValues {
 	email: string;
@@ -11,6 +12,7 @@ interface UserValues {
 }
 
 const Register: React.FC = ({testt}:any) => {
+	const navigate: NavigateFunction = useNavigate();
 	const [errorMessage, setErrorMessage] = useState<string>();
 
 	console.log(testt)
@@ -31,6 +33,7 @@ const Register: React.FC = ({testt}:any) => {
 			)
 			.then(function (response) {
 				console.log(response.data);
+				navigate("/login")
 			})
 			.catch(function (error) {
 				console.log(error);
