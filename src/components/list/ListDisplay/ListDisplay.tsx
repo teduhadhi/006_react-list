@@ -4,7 +4,7 @@ import axios from "axios";
 import { ItemProps } from "../../interfaces/list.interface";
 
 interface ListDisplay {
-	categoryList: [] | undefined;
+	categoryList: ItemProps[] | undefined;
 	handleCategory: Function;
 	handleUpdateCategory: Function;
 }

@@ -8,7 +8,7 @@ import ListInput from "../ListInput/ListInput";
 import { ItemProps } from "../../interfaces/list.interface";
 
 const List: React.FC = () => {
-	const [categoryList, setCategoryList] = useState<[]>();
+	const [categoryList, setCategoryList] = useState<ItemProps[]>();
 	const [initialValues, setInitialValues] = useState<ItemProps>({
 		name: "",
 		description: "",
