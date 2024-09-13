@@ -4,7 +4,7 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import RedirectRegister from "../navigate/RedirectRegister";
+import RedirectRegister from "../../navigate/RedirectRegister/RedirectRegister";
 
 interface UserValues {
 	email: string;

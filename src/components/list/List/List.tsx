@@ -2,15 +2,10 @@ import React, { useEffect, useState } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 
 import axios from "axios";
-import Logout from "../user/Logout";
-import ListDisplay from "./ListDisplay";
-import ListInput from "./ListInput";
-
-interface ItemProps {
-	name: string;
-	description: string;
-	id: string;
-}
+import Logout from "../../user/Logout/Logout";
+import ListDisplay from "../ListDisplay/ListDisplay";
+import ListInput from "../ListInput/ListInput";
+import { ItemProps } from "../../interfaces/list.interface";
 
 const List: React.FC = () => {
 	const [categoryList, setCategoryList] = useState<[]>();

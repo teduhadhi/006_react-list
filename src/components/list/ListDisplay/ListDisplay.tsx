@@ -1,7 +1,7 @@
 import React, { useContext, useState, createContext } from "react";
-import ListDeleteConfirm from "./ListDeleteConfirm";
+import ListDeleteConfirm from "../ListDeleteConfirm/ListDeleteConfirm";
 import axios from "axios";
-import { ItemProps } from "../interfaces/list.interface";
+import { ItemProps } from "../../interfaces/list.interface";
 
 interface ListDisplay {
 	categoryList: [] | undefined;

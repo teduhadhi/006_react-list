@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import RedirectLogin from "../navigate/RedirectLogin";
+import RedirectLogin from "../../navigate/RedirectLogin/RedirectLogin";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 
 interface UserValues {
