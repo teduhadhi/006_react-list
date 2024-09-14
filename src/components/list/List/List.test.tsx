@@ -30,7 +30,6 @@ describe("List Component", () => {
 
 	test("Render tag", () => {
 		render(<List />);
-
 		const listContainer = screen.getByTestId("container-list");
 		expect(listContainer).toBeInTheDocument();
 	});
@@ -49,11 +48,13 @@ describe("List Component", () => {
 		jest.spyOn(Storage.prototype, "getItem").mockReturnValue(null);
 
 		await act(async () => render(<List />));
+
 		expect(navigate).toHaveBeenCalledWith("/login");
 	});
 
 	test("Redirect to '/login' endpoint after logout", async () => {
 		jest.spyOn(Storage.prototype, "getItem").mockReturnValue("test");
+    
 		await act(async () => render(<List />));
 
 		const listItem = screen.getAllByTestId("list-item");
