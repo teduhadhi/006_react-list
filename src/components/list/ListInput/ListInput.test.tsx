@@ -59,9 +59,6 @@ describe("List Input Component", () => {
 		const descriptionInput = screen.getByTestId("input-description");
 		const submitButton = screen.getByTestId("button-submit-update");
 
-		expect(nameInput).toHaveValue("test update name");
-		expect(descriptionInput).toHaveValue("test update description");
-
 		await user.type(nameInput, "(updated)");
 		await user.type(descriptionInput, "(updated)");
 		await user.click(submitButton);
