@@ -28,11 +28,18 @@ describe("List Component", () => {
 		jest.spyOn(axios, "get").mockResolvedValue(mockResponse);
 	});
 
+	test("Render tag", () => {
+		render(<List />);
+
+		const listContainer = screen.getByTestId("container-list");
+		expect(listContainer).toBeInTheDocument();
+	});
+
 	test("Render category", async () => {
 		jest.spyOn(Storage.prototype, "getItem").mockReturnValue("test");
 
 		await act(async () => render(<List />));
-    
+
 		const listItem = screen.getAllByTestId("list-item");
 		expect(listItem).toHaveLength(2);
 		expect(listItem[0]).toHaveTextContent("test name 1");

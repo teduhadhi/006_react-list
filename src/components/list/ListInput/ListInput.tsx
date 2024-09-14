@@ -26,7 +26,7 @@ const ListInput = ({
 
 	return (
 		<div
-			data-testid="input-container"
+			data-testid="container-input"
 			className="flex flex-col gap-1 rounded-3xl w-60 "
 		>
 			{isInputing ? (

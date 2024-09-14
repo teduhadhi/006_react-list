@@ -11,7 +11,13 @@ describe("Login Component", () => {
 	beforeEach(() => {
 		jest.spyOn(router, "useNavigate").mockImplementation(() => navigate);
 	});
-	
+
+	test("Renders Login Page", () => {
+		render(<Login/>);
+		const loginContainer = screen.getByTestId("container-login")
+		expect(loginContainer).toBeInTheDocument();
+	})
+
 	test("Login failed error message", async () => {
 		jest.spyOn(axios, "post").mockImplementation(() => {
 			throw new Error();

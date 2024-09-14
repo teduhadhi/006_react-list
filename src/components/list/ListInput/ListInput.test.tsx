@@ -9,6 +9,24 @@ describe("List Input Component", () => {
 	const handleCancelInput = jest.fn();
 	const handleNewCategory = jest.fn();
 
+	test("Renders tag", () => {
+		const initialValues = { name: "", description: "", id: "" };
+
+		render(
+			<ListInput
+				isUpdating={false}
+				isInputing={true}
+				initialValues={initialValues}
+				handleInput={handleInput}
+				handleCancelInput={handleCancelInput}
+				handleNewCategory={handleNewCategory}
+			/>
+		);
+    
+		const inputContainer = screen.getByTestId("container-input");
+		expect(inputContainer).toBeInTheDocument();
+	});
+
 	test("Submit New Category", async () => {
 		const initialValues = { name: "", description: "", id: "" };
 

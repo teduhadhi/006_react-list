@@ -112,7 +112,7 @@ const List: React.FC = () => {
 	};
 
 	return (
-		<div className="flex gap-10 px-6 py-7 rounded-3xl bg-white shadow-lg">
+		<div data-testid="container-list" className="flex gap-10 px-6 py-7 rounded-3xl bg-white shadow-lg">
 			<ListInput
 				isUpdating={isUpdating}
 				isInputing={isInputing}

@@ -34,7 +34,7 @@ const ListDisplay = ({
 	};
 
 	return (
-		<ol className="flex flex-col gap-3 w-96 ">
+		<ol data-testid="ordered-list-display" className="flex flex-col gap-3 w-96 ">
 			{categoryList &&
 				categoryList.map((item: ItemProps, index: number) => (
 					<li
