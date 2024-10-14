@@ -1,6 +1,6 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { ItemProps } from "../../interfaces/list.interface";
+import { ItemProps } from "../../../interfaces/list.interface";
 
 interface ListInput {
 	isInputing: boolean;
@@ -27,7 +27,7 @@ const ListInput = ({
 	return (
 		<div
 			data-testid="container-input"
-			className="flex flex-col gap-1 rounded-3xl w-60 "
+			className="flex flex-col gap-1 rounded-3xl sm:w-48 lg:w-60 "
 		>
 			{isInputing ? (
 				<Formik
@@ -41,7 +41,7 @@ const ListInput = ({
 				>
 					<Form className="flex flex-col gap-1 w-full ">
 						<label
-							className="text-m text-slate-500 font-medium flex justify-between"
+							className="text-xs lg:text-sm text-slate-500 font-medium flex justify-between"
 							htmlFor="name"
 						>
 							<p>Name</p>
@@ -49,19 +49,19 @@ const ListInput = ({
 						</label>
 						<Field
 							data-testid="input-name"
-							className="shadow-md rounded-md p-2 mb-3"
+							className="text-xs lg:text-sm shadow-md rounded-md p-2 mb-3"
 							name="name"
 							id="name"
 							type="text"
 						/>
 						<ErrorMessage
-							className="text-red-500"
+							className="text-xs lg:text-sm text-red-500"
 							component="div"
 							name="name"
 						/>
 
 						<label
-							className="text-m text-slate-500 font-medium"
+							className="text-xs lg:text-sm text-slate-500 font-medium"
 							htmlFor="description"
 						>
 							Description
@@ -69,7 +69,7 @@ const ListInput = ({
 
 						<Field
 							data-testid="input-description"
-							className="shadow-md rounded-md p-2 mb-3 resize-none"
+							className="text-xs lg:text-sm shadow-md rounded-md p-2 mb-3 resize-none"
 							as="textarea"
 							resize="none"
 							rows={9}
@@ -78,21 +78,21 @@ const ListInput = ({
 							type="text"
 						/>
 						<ErrorMessage
-							className="text-red-500"
+							className="text-xs lg:text-sm text-red-500"
 							component="div"
 							name="description"
 						/>
 
 						<button
 							data-testid="button-submit-update"
-							className="font-medium bg-slate-400 text-white p-2 mt-2 mb-3 rounded-md hover:bg-slate-200 hover:text-slate-400 transition shadow-md "
+							className="text-xs lg:text-sm font-medium bg-slate-400 text-white p-2 mt-2 mb-3 rounded-md hover:bg-slate-200 hover:text-slate-400 transition shadow-md "
 							type="submit"
 						>
 							{!isUpdating ? "Submit" : "Update"}
 						</button>
 						{isInputing ? (
 							<span
-								className="text-sm cursor-pointer text-slate-500 font-medium hover:text-slate-400 transition flex justify-center"
+								className="text-xs lg:text-sm cursor-pointer text-slate-500 font-medium hover:text-slate-400 transition flex justify-center"
 								onClick={() => handleCancelInput()}
 							>
 								Cancel
@@ -103,7 +103,7 @@ const ListInput = ({
 			) : (
 				<button
 					data-testid="input-button"
-					className="font-medium bg-slate-400 text-white p-2 mt-2 mb-3 rounded-md hover:bg-slate-200 hover:text-slate-400 transition shadow-md "
+					className="text-xs lg:text-sm font-medium bg-slate-400 text-white p-2 mt-2 mb-3 rounded-md hover:bg-slate-200 hover:text-slate-400 transition shadow-md "
 					onClick={() => handleInput()}
 				>
 					Input Data

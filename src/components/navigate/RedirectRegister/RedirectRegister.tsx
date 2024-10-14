@@ -7,7 +7,7 @@ const RedirectRegister: React.FC = () => {
 	};
 
 	return (
-		<p className="flex justify-center text-sm gap-1">
+		<p className="text-[10px] sm:text-xs lg:text-sm flex justify-center gap-1">
 			Don't have an account?
 			<span
 				className=" cursor-pointer text-slate-500 font-medium hover:text-slate-400 transition"

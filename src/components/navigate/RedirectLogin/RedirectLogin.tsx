@@ -8,7 +8,7 @@ const RedirectLogin: React.FC = () => {
 
 	return (
 			<span
-				className="text-sm cursor-pointer text-slate-500 font-medium hover:text-slate-400 transition flex justify-center"
+				className="text-xs sm:text-sm lg:text-base cursor-pointer text-slate-500 font-medium hover:text-slate-400 transition flex justify-center"
 				onClick={handleRedirectLogin}
 			>
 				Log in

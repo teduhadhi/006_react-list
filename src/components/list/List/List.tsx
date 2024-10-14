@@ -5,7 +5,7 @@ import axios from "axios";
 import Logout from "../../user/Logout/Logout";
 import ListDisplay from "../ListDisplay/ListDisplay";
 import ListInput from "../ListInput/ListInput";
-import { ItemProps } from "../../interfaces/list.interface";
+import { ItemProps } from "../../../interfaces/list.interface";
 
 const List: React.FC = () => {
 	const [categoryList, setCategoryList] = useState<ItemProps[]>();
@@ -112,7 +112,10 @@ const List: React.FC = () => {
 	};
 
 	return (
-		<div data-testid="container-list" className="flex gap-10 px-6 py-7 rounded-3xl bg-white shadow-lg">
+		<div
+			data-testid="container-list"
+			className="flex flex-col sm:flex-row gap-10 px-6 py-7 rounded-3xl bg-white shadow-lg"
+		>
 			<ListInput
 				isUpdating={isUpdating}
 				isInputing={isInputing}
@@ -121,20 +124,21 @@ const List: React.FC = () => {
 				handleCancelInput={handleCancelInput}
 				handleNewCategory={(value: ItemProps) => handleNewCategory(value)}
 			/>
-			<div className="flex flex-col">
-			<div className="flex justify-between">
-				<h1 className="font-medium text-xl text-slate-500">List</h1>
-				<Logout />
+			<div className="w-72 lg:w-96 flex flex-col">
+				<div className="flex justify-between">
+					<h1 className="text-base lg:text-xl font-medium text-slate-500">List</h1>
+					<Logout />
+				</div>
+				<ListDisplay
+					categoryList={categoryList}
+					handleCategory={() => {
+						handleCategory();
+					}}
+					handleUpdateCategory={(value: ItemProps) =>
+						handleUpdateCategory(value)
+					}
+				/>
 			</div>
-			<ListDisplay
-				categoryList={categoryList}
-				handleCategory={() => {
-					handleCategory();
-				}}
-				handleUpdateCategory={(value: ItemProps) => handleUpdateCategory(value)}
-			/>
-			</div>
-			
 		</div>
 	);
 };

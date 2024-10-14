@@ -12,7 +12,7 @@ const Logout: React.FC = () => {
 	return (
 		<p
 			data-testid="logout-button"
-			className="cursor-pointer text-slate-500 font-medium hover:text-slate-400 transition px-1"
+			className="text-base lg:text-xl cursor-pointer text-slate-500 font-medium hover:text-slate-400 transition px-1"
 			onClick={handleLogout}
 		>
 			Logout

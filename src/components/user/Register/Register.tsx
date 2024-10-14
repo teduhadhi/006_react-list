@@ -11,11 +11,11 @@ interface UserValues {
 	password: string;
 }
 
-const Register: React.FC = ({testt}:any) => {
+const Register: React.FC = ({ testt }: any) => {
 	const navigate: NavigateFunction = useNavigate();
 	const [errorMessage, setErrorMessage] = useState<string>();
 
-	console.log(testt)
+	console.log(testt);
 
 	const handleRegister = async ({ email, password }: UserValues) => {
 		await axios
@@ -33,7 +33,7 @@ const Register: React.FC = ({testt}:any) => {
 			)
 			.then(function (response) {
 				console.log(response.data);
-				navigate("/login")
+				navigate("/login");
 			})
 			.catch(function (error) {
 				console.log(error);
@@ -66,53 +66,71 @@ const Register: React.FC = ({testt}:any) => {
 				handleRegister(values);
 			}}
 		>
-			<Form className="flex flex-col gap-1 w-96 px-6 py-7 rounded-3xl bg-white shadow-lg">
-				{errorMessage !== null && <p className="text-red-500 flex justify-center mb-3">{errorMessage}</p>}
+			<Form className="w-64 sm:w-72 lg:w-96 flex flex-col gap-1 px-6 py-7 rounded-3xl bg-white shadow-lg">
+				{errorMessage !== null && (
+					<p className="text-xs sm:text-sm lg:text-base text-red-500 flex justify-center mb-3">
+						{errorMessage}
+					</p>
+				)}
 
-				<label className="text-m text-slate-500 font-medium" htmlFor="email">
+				<label
+					className="text-xs sm:text-sm lg:text-base text-slate-500 font-medium"
+					htmlFor="email"
+				>
 					Email
 				</label>
 				<Field
-					className="shadow-md rounded-md p-2 mb-3"
+					className="text-xs sm:text-sm lg:text-base shadow-md rounded-md p-2 mb-3"
 					name="email"
 					type="text"
 				/>
-				<ErrorMessage className="text-red-500" component="div" name="email" />
+				<ErrorMessage
+					className="text-xs sm:text-sm lg:text-base text-red-500"
+					component="div"
+					name="email"
+				/>
 
-				<label className="text-m text-slate-500 font-medium" htmlFor="password">
+				<label
+					className="text-xs sm:text-sm lg:text-base text-slate-500 font-medium"
+					htmlFor="password"
+				>
 					Password
 				</label>
 				<Field
-					className="shadow-md rounded-md p-2 mb-3"
+					className="text-xs sm:text-sm lg:text-base shadow-md rounded-md p-2 mb-3"
 					name="password"
 					type="password"
 				/>
 				<ErrorMessage
-					className="text-red-500"
+					className="text-xs sm:text-sm lg:text-base text-red-500"
 					component="div"
 					name="password"
 				/>
 
 				<label
-					className="text-m text-slate-500 font-medium"
+					className="text-xs sm:text-sm lg:text-base text-slate-500 font-medium"
 					htmlFor="passwordConfirmation"
 				>
 					Confrim Password
 				</label>
 				<Field
-					className="shadow-md rounded-md p-2 mb-3"
+					className="text-xs sm:text-sm lg:text-base shadow-md rounded-md p-2 mb-3"
 					name="passwordConfirmation"
 					type="password"
 				/>
-				<ErrorMessage name="passwordConfirmation" />
+				<ErrorMessage
+					className="text-xs sm:text-sm lg:text-base text-red-500"
+					component="div"
+					name="passwordConfirmation"
+				/>
 
 				<button
-					className="font-medium bg-slate-400 text-white p-2 mt-2 mb-3 rounded-md hover:bg-slate-200 hover:text-slate-400 transition shadow-md"
+					className="text-xs sm:text-sm lg:text-base font-medium bg-slate-400 text-white p-2 mt-2 mb-3 rounded-md hover:bg-slate-200 hover:text-slate-400 transition shadow-md"
 					type="submit"
 				>
 					Submit
 				</button>
-        <RedirectLogin/>
+				<RedirectLogin />
 			</Form>
 		</Formik>
 	);

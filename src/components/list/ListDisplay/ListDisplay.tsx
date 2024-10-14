@@ -1,7 +1,7 @@
 import React, { useContext, useState, createContext } from "react";
 import ListDeleteConfirm from "../ListDeleteConfirm/ListDeleteConfirm";
 import axios from "axios";
-import { ItemProps } from "../../interfaces/list.interface";
+import { ItemProps } from "../../../interfaces/list.interface";
 
 interface ListDisplay {
 	categoryList: ItemProps[] | undefined;
@@ -34,12 +34,15 @@ const ListDisplay = ({
 	};
 
 	return (
-		<ol data-testid="ordered-list-display" className="flex flex-col gap-3 w-96 ">
+		<ol
+			data-testid="ordered-list-display"
+			className="flex flex-col gap-3 w-72 lg:w-96 "
+		>
 			{categoryList &&
 				categoryList.map((item: ItemProps, index: number) => (
 					<li
 						data-testid="list-item"
-						className="flex justify-between gap-4 border-t-2 border-solid border-slate-200"
+						className="flex flex-col justify-between gap-4 border-t-2 border-solid border-slate-200"
 						key={index}
 					>
 						{isDeleting && (
@@ -50,29 +53,32 @@ const ListDisplay = ({
 								}}
 							/>
 						)}
-						<div>
-							<p className="mt-1 text-sm text-slate-400 ">Name</p>
-							<p className="mb-2">{item.name}</p>
+						<div className="">
+							<div className="mt-1 flex justify-between">
+								<p className="text-xs lg:text-sm text-slate-400 ">Name</p>
+								<p className="text-xs lg:text-sm text-slate-400">
+									Id : {item.id}
+								</p>
+							</div>
+							<p className="mb-2 text-xs lg:text-sm">{item.name}</p>
 
-							<p className="text-sm text-slate-400">Description</p>
-							<p className="mb-3"> {item.description}</p>
+							<p className="text-xs lg:text-sm text-slate-400">Description</p>
+							<p className="text-justify mb-3 text-xs lg:text-sm">
+								{item.description}
+							</p>
 						</div>
 
-						<div className="flex flex-col justify-between mt-2 mb-3">
-							<p className="flex justify-end text-sm text-slate-400">
-								Id : {item.id}
-							</p>
-							<div className="flex flex-col justify-around gap-1">
+							<div className="flex justify-end gap-5">
 								<button
 									data-testid="button-edit-item"
-									className="cursor-pointer text-slate-500 font-medium hover:text-slate-400 transition pl-4 text-sm"
+									className="text-xs lg:text-sm cursor-pointer text-slate-500 font-medium hover:text-slate-400 transition pl-4"
 									onClick={() => handleUpdateCategory(item)}
 								>
 									EDIT
 								</button>
 								<button
 									data-testid="button-delete-item"
-									className="cursor-pointer text-red-700 font-medium hover:text-red-500 transition text-sm"
+									className="text-xs lg:text-sm cursor-pointer text-red-700 font-medium hover:text-red-500 transition"
 									onClick={() => {
 										handleDeleteConfirmation(item.id);
 									}}
@@ -80,7 +86,6 @@ const ListDisplay = ({
 									DELETE
 								</button>
 							</div>
-						</div>
 					</li>
 				))}
 		</ol>
